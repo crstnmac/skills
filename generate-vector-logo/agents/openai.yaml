@@ -1,0 +1,4 @@
+interface:
+  display_name: "Vector Logo Generator"
+  short_description: "Create abstract non-letterform SVG logo systems"
+  default_prompt: "Use $generate-vector-logo to explore original abstract, non-letterform SVG directions and deliver production-ready logo assets."

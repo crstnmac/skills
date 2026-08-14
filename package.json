@@ -1,0 +1,31 @@
+{
+  "name": "@crstnmac/generate-vector-logo",
+  "version": "1.0.1",
+  "description": "Codex skill for creating original, production-ready geometric SVG logo systems.",
+  "license": "MIT",
+  "author": "Criston Mascarenhas",
+  "keywords": [
+    "codex",
+    "skill",
+    "svg",
+    "logo",
+    "vector",
+    "design"
+  ],
+  "files": [
+    "generate-vector-logo/SKILL.md",
+    "generate-vector-logo/agents/",
+    "generate-vector-logo/references/",
+    "generate-vector-logo/scripts/*.py"
+  ],
+  "scripts": {
+    "test": "python3 -m unittest discover -s tests -v",
+    "prepack": "npm test"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "optionalDependencies": {
+    "@resvg/resvg-js-cli": "2.6.2-beta.1"
+  }
+}
