@@ -1,6 +1,6 @@
 {
   "name": "@crstnmac/generate-vector-logo",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Codex skill for creating original, production-ready geometric SVG logo systems.",
   "license": "MIT",
   "author": "Criston Mascarenhas",
@@ -13,14 +13,28 @@
     "design"
   ],
   "files": [
-    "generate-vector-logo/SKILL.md",
-    "generate-vector-logo/agents/",
-    "generate-vector-logo/references/",
-    "generate-vector-logo/scripts/*.py"
+    "SKILL.md",
+    "README.md",
+    "LICENSE",
+    "agents/",
+    "references/",
+    "scripts/*.py"
   ],
   "scripts": {
     "test": "python3 -m unittest discover -s tests -v",
     "prepack": "npm test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/crstnmac/skills.git",
+    "directory": "generate-vector-logo"
+  },
+  "homepage": "https://github.com/crstnmac/skills/tree/main/generate-vector-logo",
+  "bugs": {
+    "url": "https://github.com/crstnmac/skills/issues"
+  },
+  "publishConfig": {
+    "access": "public"
   },
   "engines": {
     "node": ">=18"

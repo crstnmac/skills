@@ -1,0 +1,58 @@
+{
+  "name": "@crstnmac/a11y-audit",
+  "version": "1.2.0",
+  "description": "Framework-aware skill for accessible component guidance, reviews, and WCAG website audits.",
+  "license": "MIT",
+  "author": "Criston Mascarenhas",
+  "type": "module",
+  "bin": {
+    "a11y-audit": "scripts/audit.mjs"
+  },
+  "scripts": {
+    "audit": "node scripts/audit.mjs",
+    "test": "node --check scripts/audit.mjs && node --test tests/*.test.mjs && node scripts/audit.mjs --help",
+    "prepack": "npm test"
+  },
+  "files": [
+    "SKILL.md",
+    "README.md",
+    "LICENSE",
+    "agents/",
+    "references/",
+    "scripts/*.mjs",
+    "tests/*.test.mjs"
+  ],
+  "keywords": [
+    "skill",
+    "accessibility",
+    "a11y",
+    "playwright",
+    "axe-core",
+    "wcag",
+    "audit",
+    "components",
+    "react",
+    "vue",
+    "svelte",
+    "angular"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/crstnmac/skills.git",
+    "directory": "a11y-audit"
+  },
+  "homepage": "https://github.com/crstnmac/skills/tree/main/a11y-audit",
+  "bugs": {
+    "url": "https://github.com/crstnmac/skills/issues"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "@axe-core/playwright": "^4.10.2",
+    "playwright": "^1.55.0"
+  }
+}
