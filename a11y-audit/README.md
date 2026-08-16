@@ -6,16 +6,30 @@ It can advise on a component before code exists, review an implementation in Rea
 
 ## Install
 
+Recommended, using the open skills CLI:
+
+```bash
+npx skills add crstnmac/skills --skill a11y-audit
+```
+
+For a global Codex installation without prompts:
+
+```bash
+npx skills add crstnmac/skills \
+  --skill a11y-audit \
+  --global \
+  --agent codex \
+  --yes
+```
+
+Alternatively, install the npm package directly:
+
 ```bash
 npm install @crstnmac/a11y-audit
 ```
 
 The skill bundle is installed at `node_modules/@crstnmac/a11y-audit`.
-Copy or link that directory into your agent skills directory, then invoke `$a11y-audit`.
-
-```bash
-ln -s "$(pwd)/node_modules/@crstnmac/a11y-audit" ~/.grok/skills/a11y-audit
-```
+Copy or link that directory into your agent's skills directory, then invoke `$a11y-audit`.
 
 First time, install the Chromium browser used by the runner:
 

@@ -4,6 +4,24 @@ A Codex skill for designing original, non-letterform geometric SVG logo marks an
 
 ## Install
 
+Recommended, using the open skills CLI:
+
+```bash
+npx skills add crstnmac/skills --skill generate-vector-logo
+```
+
+For a global Codex installation without prompts:
+
+```bash
+npx skills add crstnmac/skills \
+  --skill generate-vector-logo \
+  --global \
+  --agent codex \
+  --yes
+```
+
+Alternatively, install the npm package directly:
+
 ```bash
 npm install @crstnmac/generate-vector-logo
 ```
