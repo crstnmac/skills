@@ -9,6 +9,7 @@ import {
   toJunit,
   toSarif,
 } from "../scripts/audit.mjs";
+import { toXlsx } from "../scripts/xlsx.mjs";
 
 function report(violations = [], keyboardIssues = []) {
   return {
@@ -80,4 +81,22 @@ test("formatReport keeps JSON as the default interchange format", () => {
   const current = report([imageAlt]);
   assert.deepEqual(JSON.parse(formatReport(current, "json")), current);
   assert.match(formatReport(current, "junit"), /^<\?xml/);
+});
+
+test("XLSX export creates structured workbook sheets", async () => {
+  const current = report([imageAlt]);
+  current.baseUrl = "http://localhost:3000";
+  current.wcag = "2.2-aa";
+  current.viewport = { width: 1280, height: 800 };
+  current.pages[0].status = 200;
+  current.pages[0].title = "Products";
+  current.pages[0].lang = "en";
+  current.pages[0].incomplete = [];
+  current.pages[0].viewport = current.viewport;
+  current.summary = { pages: 1 };
+
+  const buffer = await toXlsx(current);
+  assert.equal(Buffer.from(buffer).subarray(0, 2).toString(), "PK");
+
+  assert.ok(buffer.byteLength > 2_000);
 });
