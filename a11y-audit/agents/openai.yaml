@@ -1,0 +1,4 @@
+interface:
+  display_name: "Accessible UI Advisor"
+  short_description: "Design, review, and audit accessible web components"
+  default_prompt: "Use $a11y-audit to recommend an accessible component pattern from its page context or audit the local website, then provide framework-native implementation feedback and verification."

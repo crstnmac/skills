@@ -8,7 +8,7 @@ from unittest import mock
 
 
 ROOT = Path(__file__).resolve().parents[1]
-SCRIPTS = ROOT / "generate-vector-logo" / "scripts"
+SCRIPTS = ROOT / "scripts"
 sys.path.insert(0, str(SCRIPTS))
 
 validate_svg = importlib.import_module("validate_svg")
