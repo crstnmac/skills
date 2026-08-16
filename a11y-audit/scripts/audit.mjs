@@ -36,8 +36,8 @@ Options:
   --url <url>              Base URL of the running local app (required)
   --paths <path...>        Paths to scan (default: /)
   --paths-file <file>      Newline-separated paths
-  --out <file>             Write JSON report (default: stdout only)
-  --format <format>        json (default) | sarif | junit
+  --out <file>             Write the report to a file (default: stdout only)
+  --format <format>        json (default) | sarif | junit | xlsx
   --baseline <file>        Compare with a previous JSON report and gate new issues only
   --fail-on <impact>       minor (default) | moderate | serious | critical | none
   --wcag <target>          2.0-a | 2.0-aa | 2.1-aa | 2.2-aa (default) | 2.2-aaa
@@ -104,8 +104,8 @@ function parseArgs(argv) {
         break;
       case "--format":
         opts.format = next().toLowerCase();
-        if (!["json", "sarif", "junit"].includes(opts.format)) {
-          throw new Error(`Invalid --format ${opts.format}; expected json, sarif, or junit`);
+        if (!["json", "sarif", "junit", "xlsx"].includes(opts.format)) {
+          throw new Error(`Invalid --format ${opts.format}; expected json, sarif, junit, or xlsx`);
         }
         break;
       case "--baseline":
@@ -750,6 +750,10 @@ async function main() {
     console.error(`--url is required\n${usage()}`);
     process.exit(2);
   }
+  if (opts.format === "xlsx" && !opts.out) {
+    console.error("--format xlsx requires --out <file.xlsx>");
+    process.exit(2);
+  }
 
   const report = await runAudit(opts);
   if (opts.baseline) {
@@ -762,7 +766,10 @@ async function main() {
     }
     report.regression = compareBaseline(report, baseline);
   }
-  const output = formatReport(report, opts.format);
+  const output =
+    opts.format === "xlsx"
+      ? await (await import("./xlsx.mjs")).toXlsx(report)
+      : formatReport(report, opts.format);
   if (opts.out) {
     writeFileSync(opts.out, output);
     console.error(`Wrote ${opts.out}`);

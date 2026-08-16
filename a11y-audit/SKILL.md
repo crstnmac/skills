@@ -153,7 +153,16 @@ node <skill-root>/scripts/audit.mjs --url <base-url> \
   --format sarif --out a11y-results.sarif
 ```
 
-Supported formats are `json`, `sarif`, and `junit`. Without a baseline, the severity gate applies to every finding. With a baseline, it applies only to new findings; page-load errors always fail. Keep the baseline JSON as an intentional reviewed artifact—never refresh it merely to make CI pass.
+Supported formats are `json`, `sarif`, `junit`, and `xlsx`. Without a baseline, the severity gate applies to every finding. With a baseline, it applies only to new findings; page-load errors always fail. Keep the baseline JSON as an intentional reviewed artifact—never refresh it merely to make CI pass.
+
+For a shareable Excel report instead of chat or JSON output:
+
+```bash
+node <skill-root>/scripts/audit.mjs --url <base-url> \
+  --format xlsx --out accessibility-report.xlsx
+```
+
+The workbook contains a formatted summary plus sheets for findings, pages, review items, and—when a baseline is supplied—new and resolved regressions. Inspect the saved workbook rather than copying the raw audit payload into the conversation.
 
 If the user asked for a full pass, run desktop then `--mobile` and merge findings. Read the JSON. Do not summarize from memory of the CLI table.
 

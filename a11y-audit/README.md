@@ -53,6 +53,13 @@ npx a11y-audit --url http://localhost:3000 --baseline baseline.json \
   --fail-on serious --format sarif --out a11y-results.sarif
 ```
 
+Export a formatted Excel workbook with summary, findings, pages, review items, and regression sheets:
+
+```bash
+npx a11y-audit --url http://localhost:3000 \
+  --format xlsx --out accessibility-report.xlsx
+```
+
 Node.js 18 or newer is required.
 
 ## Verify
