@@ -31,8 +31,8 @@ The secondary reading must modify the primary construction. Avoid attaching a mi
 ## 5. Run the concept gate
 
 - Does the silhouette communicate the primary subject without color?
-- Is the concept independent of the brand's name, spelling, and initials?
 - Does the silhouette and its negative space avoid alphabetic or typographic readings?
+- Is the concept independent of the brand's name, spelling, and initials?
 - Is the secondary meaning structural rather than decorative?
 - Can the mark be described without naming the reference?
 - Would it remain distinct beside the reference?
