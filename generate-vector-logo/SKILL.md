@@ -1,11 +1,23 @@
 ---
 name: generate-vector-logo
-description: Create or refine original, production-ready, non-letterform geometric SVG logo marks, app icons, monochrome variants, and React logo components from a brief or visual reference. Use for requests to design, generate, tune a logo prompt, translate “like this brand” into originality-safe design traits, refine, validate, render, or export an abstract logo, symbol, favicon, brand mark, or flat vector icon where clean editable SVG geometry, small-size legibility, reference calibration, visual iteration, and platform icon assets matter. Excludes initials, monograms, typography, hidden letters, and alphabet-derived symbols.
+license: MIT
+description: >
+  Create or refine original, production-ready, non-letterform geometric SVG
+  logo marks, app icons, monochrome variants, and React logo components from a
+  brief or visual reference. Use for requests to design, generate, tune a logo
+  prompt, translate "like this brand" into originality-safe design traits,
+  refine, validate, render, or export an abstract logo, symbol, favicon, brand
+  mark, or flat vector icon where clean editable SVG geometry, small-size
+  legibility, reference calibration, visual iteration, and platform icon assets
+  matter. Excludes initials, monograms, typography, hidden letters, and
+  alphabet-derived symbols.
 ---
 
 # Generate Vector Logo
 
 Create an original logo system from deliberate SVG geometry. Use references for abstract design traits, never tracing. Keep paths, masks, color, accessibility, and exports deterministic.
+
+Resolve `<skill-root>` as the directory that contains this `SKILL.md`.
 
 ## Core rules
 
@@ -50,8 +62,6 @@ For each direction, identify the primary read, secondary meaning, governing cons
 Read [references/vector-logo-construction.md](references/vector-logo-construction.md) when choosing geometry, cutouts, optical corrections, colors, or export variants.
 
 ### 4. Validate and render
-
-Resolve script paths relative to this `SKILL.md`.
 
 ```bash
 python3 <skill-root>/scripts/validate_svg.py --strict-flat logo-variants/*.svg

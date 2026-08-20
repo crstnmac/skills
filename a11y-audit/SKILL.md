@@ -5,12 +5,14 @@ description: >
   components, infer the correct semantic and interaction pattern from the
   component's purpose, placement on the page, surrounding landmarks, and user
   journey, then provide framework-native structure, an accessible API, keyboard
-  behavior, states, and test guidance. For existing sites, use Playwright,
-  axe-core, keyboard checks, and source review to map WCAG issues back to
-  components with concrete fixes. Use when the user asks how to create or place
-  an accessible component, requests accessibility feedback or a component API,
-  asks to check accessibility, run an a11y audit, find WCAG issues, test keyboard
-  or screen-reader support, scan a local site, or invokes /a11y-audit.
+  behavior, states, and test guidance. For existing sites, templates, or GitHub
+  demos, use Playwright, axe-core, keyboard checks, and source review to map
+  WCAG issues back to components with concrete fixes and host-native contracts
+  when findings cluster. Use when the user asks how to create or place an
+  accessible component, requests accessibility feedback, a component API, or
+  component suggestions, asks to check accessibility, run an a11y audit, find
+  WCAG issues, test keyboard or screen-reader support, scan a local site, a
+  template, or a GitHub demo, or invokes /a11y-audit.
 ---
 
 # Accessible component guidance and audit
@@ -103,11 +105,17 @@ Distinguish violations from recommendations. Do not call a preference a WCAG fai
 
 ### 2. Resolve the target
 
-Use the URL the user gave. Otherwise detect the local app:
+Resolve a **runnable HTTP origin** and a **source tree** when both exist. A git-host page is not an audit URL.
 
-- `package.json` scripts (`dev`, `start`) and framework defaults (Next `3000`, Vite `5173`, Remix `5173`, Astro `4321`, Angular `4200`, Django/Rails `8000`, Hugo `1313`).
-- `.env*` for `PORT`, `HOST`.
-- An already-listening process on those ports.
+1. If the user gave an `http(s)` page that is not a repository browser (`github.com`, `gitlab.com`, `bitbucket.org`, `codeberg.org`), probe it and use it.
+2. If they gave a git-host URL, archive, or template name:
+   - Use the workspace checkout when it already is that project. Otherwise shallow-clone for source mapping; do not nest the clone inside an unrelated app.
+   - Prefer a documented public demo that matches this source (README Demo / Live, `*.github.io`, product `*-demo.*` hosts) when it responds.
+   - Otherwise start the project's own dev script locally.
+3. Otherwise detect the local app:
+   - `package.json` scripts (`dev`, `start`) and framework defaults (Next `3000`, Vite `5173`, Remix `5173`, Astro `4321`, Angular `4200`, Django/Rails `8000`, Hugo `1313`, webpack-dev-server `3000` / `8080`).
+   - `.env*` for `PORT`, `HOST`.
+   - An already-listening process on those ports.
 
 Probe the URL (`curl -I` or an HTTP GET). If nothing is listening, start the project's dev script in the background and wait until it responds. Do not kill a server the user already started.
 
@@ -119,7 +127,8 @@ Build a path list. Cap at 20 unless the user asks for more.
 
 1. Paths the user named.
 2. Router files: `app/**/page.{js,jsx,ts,tsx}`, `pages/**/*.{js,jsx,ts,tsx}` (skip `api/`, `_app`, `_document`), `src/routes/**`, `src/pages/**`.
-3. Same-origin links from the homepage if the router is unclear — use `--crawl`.
+3. Static HTML entry points: `src/*.html`, `*.html` at the site root. Skip `partials/`, `includes/`, `layouts/`, and fragment-only folders. Map `/file.html` and extensionless `/file` if the server serves both.
+4. Same-origin links from the homepage if the router is still unclear — use `--crawl`.
 
 Always include `/`. Skip dynamic routes that need unknown IDs unless the user provides values (`/posts/1`). Prefer one representative of each template.
 
@@ -174,6 +183,8 @@ Run the static greps in that file. If the project already has `eslint-plugin-jsx
 
 ### 6. Report
 
-Write the audit in the conversation using [references/report.md](references/report.md). Deduplicate the same rule + component across pages into one finding with a page list.
+Write the audit in the conversation using [references/report.md](references/report.md). Deduplicate the same rule + owning component or partial across pages into one finding with a page list.
+
+If the user asked for component suggestions or findings cluster on reusable primitives, add the **Component recommendations** section from that file. Follow **Component guidance** for each primitive. Prefer one host-native contract that would prevent the cluster.
 
 If the user asked to fix: apply focused patches (one concern per change), then re-run `audit.mjs` on the affected paths and report before/after counts.

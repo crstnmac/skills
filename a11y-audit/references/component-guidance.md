@@ -6,11 +6,13 @@ Determine the component's relationship to the page before choosing markup.
 
 | Placement or purpose | Default structure | Key questions |
 | --- | --- | --- |
+| Skip link | First focusable control; in-page link to `main` | Can keyboard users bypass repeated chrome? |
 | Site-wide header | `header` containing one primary `nav` when present | Is the home link named? Is this repeated on every page? |
 | Page header inside `main` | Usually a `div`/sectioning context with the page `h1`, not another banner landmark | Does the route have exactly one clear page title? |
 | Repeated navigation set | Named `nav` with a list of links | Can multiple nav landmarks be distinguished by name? |
 | Breadcrumbs | Named `nav`, ordered list, current page with `aria-current="page"` | Is the current item a link only when navigation is meaningful? |
-| Sidebar | `aside` only when complementary to the main content; named `nav` when it is navigation | Would the content still make sense without it? |
+| Sidebar | `aside` only when complementary to the main content; named `nav` when it is navigation | Would the content still make sense without it? Are group triggers buttons with `aria-expanded`, not `href="#"`? |
+| Icon-only control | `<button>` with a required accessible name | Is the name a semantic `label` / `sr-only` text, not a tooltip-only hint? |
 | Main content | One primary `main` landmark | Are nested reusable components incorrectly creating more `main` elements? |
 | Search | `search` landmark or named form | Is there a visible label and a clear submit action? |
 | Repeated cards | List when the collection is conceptually a list; headings only when each card starts a real subsection | Does the whole card become a nested-interactive click target? |
@@ -63,6 +65,7 @@ Keep the semantic contract stable and translate framework mechanics:
 - **Svelte/SvelteKit:** use component props/events, bindings/actions for focus behavior, and native/router links as appropriate.
 - **Angular:** use inputs/outputs, template references, directives, and Angular Router links; preserve native events and elements.
 - **Astro/server HTML:** prefer zero-JavaScript native behavior; hydrate only interactions that require client state.
+- **HTML with a binding layer (Alpine, Stimulus, htmx, Petite Vue):** keep native elements; bind state onto `button`, `dialog`, and labelled fields. `@click` / `data-action` on a `div` or `span` is not an accessible control.
 - **Web Components:** use `ElementInternals` where form association or semantics require it, manage shadow-DOM labels/focus carefully, and expose states consistently.
 
 Framework syntax never justifies changing a button into a clickable `div`, removing a label, or implementing only part of a composite widget pattern.

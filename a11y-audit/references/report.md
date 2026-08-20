@@ -37,8 +37,8 @@ Impact: Screen reader users hear the filename or nothing.
 Fix: Add descriptive alt, or alt="" if decorative.
 ```
 
-- `Source` is file:line, or `runtime-only — <reason>`.
-- `Fix` is specific to this codebase (component names, tokens, existing `sr-only` / `Label` primitives). No generic essays.
+- `Source` is file:line, or `runtime-only — <reason>` (vendor player, painted chart text, CMS HTML).
+- `Fix` is specific to this codebase (component names, tokens, existing `sr-only` / `Label` primitives). No generic essays. Do not recommend editing third-party iframe or library internals.
 - Cite axe `helpUrl` once per rule, not per node.
 
 ## Review items
@@ -52,6 +52,14 @@ Issues found in source that the loaded pages never rendered (dead routes, unopen
 ## Patterns
 
 Recurring causes, not one-off nodes: "icon buttons lack accessible names in `src/components/ui/`".
+
+## Component recommendations
+
+Include when the user asked how to build or place the primitives, or when several findings share one owning component or token.
+
+One subsection per primitive, using the feedback format in [component-guidance.md](component-guidance.md). Order by how many findings that primitive would clear. Point at clustered rule ids; do not restate every node.
+
+Prefer the host stack (React, Vue, Alpine, HTML partials, existing `Button` / `Label`). One contract per primitive. Apply the pattern rejection gate before recommending a custom combobox, grid, or menu.
 
 ## Out of scope / not tested
 
